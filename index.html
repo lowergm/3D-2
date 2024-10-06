@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <title>Abstract Engine Mobile 1.3.1</title>
+    <style>
+        body, html {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1c;
+        }
+        #jogo {
+          width: 100%;
+          height: 100vh;
+        }
+        .header {
+            background-color: #2b2b2b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1px 0;
+        }
+        .header button {
+            background: #3c4a5b;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        button {
+            background: #3c4a5b;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .header button:hover {
+            background: #576b83;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        .sidebar-left {
+            width: 100px;
+            background: #2b2b2b;
+            padding: 10px;
+        }
+        .NewObjects-list {
+            display: none;
+            background: #3c4a5b;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            height: 100vh;
+            overflow: auto;
+        }
+        .NewObjects-list button {
+            background: #576b83;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .NewObjects-list button:hover {
+            background: #4a5969;
+        }
+        /* Aqui é onde ficará o ambiente */
+        #environmentPlaceholder {
+            width: 100%;
+            height: 100%;
+            background-color: #3c4a5b; /* Cor temporária para visualizar a área */
+        }
+        
+        #codigo {
+            background-color: #5E639C;
+            color: white;
+            border: 1px solid black;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #skyBox {
+            padding: 10px;
+            display: none;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            background: #3c4a5b;
+            overflow: auto;
+            left: 610px;
+        }
+        
+        #cod {
+            background-color: #000;
+            color: white;
+            border: none;
+        }
+        #cod:focus {
+            background-color: #000;
+            border: none;
+        }
+    </style>
+    <script src="//code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+    <dialog id="codigo">
+      <p>script.js</p>
+      <textarea name="cod" id="cod" cols="40" rows="10">console.log("Hello, World");</textarea>
+      <button id="salvarEditor">Salvar</button>
+    </dialog>
+    <div class="header">
+        <button id="executarCod">Play</button>
+        <button id="addBtn">Adicionar</button>
+        <button id="abrirEditor">Código</button>
+        <select id="selecionarObjeto">
+            <option value="escolherObjeto">Escolha um objeto</option>
+            <option value="todosObjetos">Todos os Objetos</option>
+            <option value="skyBox">Sky Box</option>
+            <option value="gridHelper">GridHelper</option>
+            <option value="todosCubos">Todos os Cubos</option>
+            <option value="todasEsferas">Todas as Esferas</option>
+            <option value="todasCapsulas">Todas as Cápsulas</option>
+            <option value="todosPlanos">Todos os Planos</option>
+        </select>
+    </div>
+    <div class="container">
+        <div class="sidebar-left">
+            <div class="NewObjects-list" id="newobjectList">
+                <button id="cubo">Adicionar Cubo</button>
+                <button id="esfera">Adicionar Esfera</button>
+                <button id="capsula">Adicionar Cápsula</button>
+                <button id="plano">Adicionar Plano</button>
+                <button id="cone">Adicionar Cone</button>
+                <button></button>
+            </div>
+        </div>
+        <div id="jogo"></div>
+        <div id="arquivos" class="Arquivos">
+          <dialog id="skyBoxOptions">
+            <h5>Cor do céu</h5>
+            <input type="color" name="corSkyBox" id="corSkyBox">
+          </dialog>
+        </div>
+    </div>
+    
+    <script>
+        const objectList = document.getElementById('newobjectList');
+        document.getElementById('addBtn').onclick = () => {
+            objectList.style.display = objectList.style.display === 'block' ? 'none' : 'block';
+        };
+    </script>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
